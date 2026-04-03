@@ -1,5 +1,3 @@
-;
-
 import React, { useState } from "react";
 import { HoverImageData } from "../JsonData/Home_Json";
 import { FaEye, FaHeart, FaShareAlt, FaBoxOpen, FaShoppingCart } from "react-icons/fa";

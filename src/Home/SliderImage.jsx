@@ -1,123 +1,57 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import image from "../assets/Images/image.png";
-import image1 from "../assets/Images/beautiful.jpg";
-import image2 from "../assets/Images/top.jpg";
-import image3 from "../assets/Images/pala.jpg";
+
+import slider1 from "../assets/Images/slider1.webp";
+import slider2 from "../assets/Images/slider2.webp";
 
 export default function ServiceHero() {
-  const ref = useRef(null);
-  const [show, setShow] = useState(false);
-  const [girlIndex, setGirlIndex] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
-
-  const slides = [
-    { image: image3, title: "Beauty", subtitle: "That Defines You", tagline: "Luxury Makeup • Skincare • Timeless Glow" },
-    { image: image2, title: "Glow", subtitle: "Beyond Expectations", tagline: "Pure Radiance • Skin Love • Confidence" },
-    { image: image1, title: "Elegance", subtitle: "In Every Touch", tagline: "Premium Care • Soft Glam • Luxury Feel" },
-    { image, title: "Luxury", subtitle: "You Can Feel", tagline: "High End Beauty • Bold & Beautiful" },
-  ];
+  const slides = [slider1, slider2];
+  const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
-    handleResize();
-    window.addEventListener("resize", handleResize);
-
-    const io = new IntersectionObserver(
-      ([entry]) => entry.isIntersecting && setShow(true),
-      { threshold: 0.1 }
-    );
-    if (ref.current) io.observe(ref.current);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-      io.disconnect();
-    };
+    const randomIndex = Math.floor(Math.random() * slides.length);
+    setIndex(randomIndex);
   }, []);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setGirlIndex((prev) => (prev + 1) % slides.length);
-    }, 3500);
-    return () => clearInterval(interval);
-  }, []);
-
-  const current = slides[girlIndex];
+  const nextSlide = () => setIndex((prev) => (prev + 1) % slides.length);
+  const prevSlide = () => setIndex((prev) => (prev - 1 + slides.length) % slides.length);
 
   return (
-    <section
-      ref={ref}
-      className="relative min-h-[90vh] md:min-h-screen flex items-center justify-center overflow-hidden pt-16 sm:pt-20"
-    >
-      {/* BACKGROUND – SMOOTH */}
+    /* mt-0 aur p-0 ensure karega ki koi gap na aaye */
+    <section className="relative mt-0  w-full h-[50vh] md:h-[80vh] overflow-hidden bg-white m-0 p-0">
+      
       <div className="absolute inset-0">
         <AnimatePresence mode="wait">
           <motion.img
-            key={girlIndex}
-            src={current.image}
-            alt="Background"
-            className="h-full w-full object-cover"
-            initial={{ opacity: 0, scale: 1.05 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 1.03 }}
-            transition={{ duration: 1, ease: "easeInOut" }}
+            key={index}
+            src={slides[index]}
+            alt={`Slide ${index}`}
+            className="h-full w-full object-cover md:object-fill"
+            initial={{ x: 300, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: -300, opacity: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
           />
         </AnimatePresence>
       </div>
 
-      {/* CONTENT */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      {/* ARROWS */}
+      <button onClick={prevSlide} className="absolute left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 md:w-12 md:h-12 bg-white/90 rounded-full shadow-lg flex items-center justify-center hover:bg-[#a52a2a] hover:text-white transition-colors">
+        <span className="text-xl md:text-2xl font-bold">&#10094;</span>
+      </button>
 
-          {/* LEFT TEXT – SMOOTH */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={girlIndex + "text"}
-              className="text-center lg:text-left order-2 lg:order-1"
-              initial={{ opacity: 0, y: 25 }}
-              animate={show ? { opacity: 1, y: 0 } : {}}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.8, ease: "easeInOut" }}
-            >
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold mb-4 leading-tight">
-                <span className="block text-gray-900">{current.title}</span>
-                <span className="block text-black mt-2">{current.subtitle}</span>
-              </h1>
+      <button onClick={nextSlide} className="absolute right-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 md:w-12 md:h-12 bg-white/90 rounded-full shadow-lg flex items-center justify-center hover:bg-[#a52a2a] hover:text-white transition-colors">
+        <span className="text-xl md:text-2xl font-bold">&#10095;</span>
+      </button>
 
-              <p className="text-base sm:text-lg text-black max-w-xl mx-auto lg:mx-0">
-                {current.tagline}
-              </p>
-            </motion.div>
-          </AnimatePresence>
-
-          {/* RIGHT IMAGE – SMOOTH */}
-          <div className="flex justify-center lg:justify-end order-2 lg:order-2">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={girlIndex + "img"}
-                className="relative h-[300px] sm:h-[400px] w-[240px] sm:w-[320px] overflow-hidden rounded-2xl shadow-xl"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.97 }}
-                transition={{ duration: 0.8, ease: "easeInOut" }}
-              >
-                <motion.img
-                  src={current.image}
-                  alt={current.title}
-                  className="h-full w-full object-cover"
-                />
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
-        </div>
+      {/* DOTS */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3 z-30">
+        {slides.map((_, i) => (
+          <button key={i} onClick={() => setIndex(i)} 
+            className={`transition-all duration-300 rounded-full shadow-sm ${index === i ? "w-10 h-2.5 bg-[#a52a2a]" : "w-2.5 h-2.5 bg-gray-300"}`}
+          />
+        ))}
       </div>
-
-      {isMobile && (
-        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-gray-500 text-xs">
-          Swipe to explore
-        </div>
-      )}
     </section>
   );
 }
