@@ -1,218 +1,82 @@
 import {
-  FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn,
-  FaPhone, FaEnvelope, FaMapMarkerAlt
+  FaFacebookF, FaInstagram, FaTwitter, FaEnvelope, FaLinkedinIn
 } from "react-icons/fa";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
-  const [email, setEmail] = useState("");
-
-  const handleSend = () => {
-    if (email) {
-      alert(`Email sent to: ${email}`);
-      setEmail("");
-    }
-  };
-
-  // Company links array
-  const companyLinks = [
-    {
-      id: 1,
-      name: "Home",
-      link: "/"
-    },
-    {
-      id: 2,
-      name: "About",
-      link: "/about"
-    },
-    {
-      id: 3,
-      name: "Product",
-      link: "/products"
-    },
-  ];
-
-  // Help links array
-  const helpLinks = [
-    {
-      name: "Contact Us",
-      link: "/contact"
-    },
-    {
-      name: "Track Order",
-      link: "/track-order"
-    }
-  ];
-
   return (
-    <>
-      <footer className="bg-white text-gray-800 w-full pt-16">
-        {/* MAIN FOOTER CONTENT */}
-        <div className="max-w-7xl mx-auto px-6 pb-16">
-          {/* GRID CONTENT */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
-            {/* ABOUT - COLSPAN 2 */}
-            <div className="lg:col-span-2">
-              <div className="mb-8">
-                <div className="w-16 h-1 bg-gradient-to-r from-pink-700 to-pink-500 mb-4"></div>
-                <p className="text-black text-lg leading-relaxed">
-                  India's trusted destination for beauty, skincare & luxury cosmetics.
-                  Discover authentic brands, trending products & expert care.
-                </p>
-              </div>
-
-              {/* TAGLINE */}
-              <div className="mt-10">
-                <h3 className="text-2xl font-bold text-black">
-                  BEAUTY YOU DESERVE 
-                </h3>
-              </div>
-
-              {/* SOCIAL ICONS */}
-              <div className="flex gap-4 mt-8">
-                <div className="w-10 h-10 rounded-full bg-black flex items-center justify-center cursor-pointer transition">
-                  <FaFacebookF className="text-white" />
+    <footer className="bg-white text-black w-full pt-16">
+      <div className="max-w-7xl mx-auto px-6">
+        
+        {/* MAIN CONTENT GRID */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 pb-12">
+          
+          {/* 1. ABOUT US SECTION (Wider) */}
+          <div className="lg:col-span-4 space-y-6">
+            <h3 className="text- font-bold text-lg uppercase tracking-wider">About Us</h3>
+            <p className="text-sm leading-7 text-black">
+              Our company <span className="font-bold text-black">Puspendra</span> has been a leader in the beauty industry for years. We provide the best quality range of authentic skincare, professional makeup, and luxury beauty essentials.
+            </p>
+            {/* Social Icons with Circular Borders */}
+            <div className="flex gap-3 ">
+              {[FaFacebookF, FaInstagram, FaTwitter, FaEnvelope, FaLinkedinIn].map((Icon, i) => (
+                <div key={i} className="w-9 h-9 rounded-full border border-gray-200 flex items-center justify-center cursor-pointer hover:bg-[#D4AF37] hover:text-white hover:border-[#D4AF37] transition-all">
+                  <Icon size={14} />
                 </div>
-                <div className="w-10 h-10 rounded-full bg-black flex items-center justify-center cursor-pointer transition">
-                  <FaTwitter className="text-white" />
-                </div>
-                <div className="w-10 h-10 rounded-full bg-black flex items-center justify-center cursor-pointer transition">
-                  <FaInstagram className="text-white" />
-                </div>
-                <div className="w-10 h-10 rounded-full bg-black flex items-center justify-center cursor-pointer transition">
-                  <FaLinkedinIn className="text-white" />
-                </div>
-              </div>
-            </div>
-
-            {/* COMPANY */}
-            <div>
-              <h3 className="text-xl font-semibold text-pink-700 mb-6 tracking-widest">COMPANY</h3>
-              <ul className="space-y-3">
-                {companyLinks.map((item) => (
-                  <li key={item.id}>
-                    <Link 
-                      to={item.link}
-                      className="text-black hover:text-pink-700 cursor-pointer transition-colors block"
-                    >
-                      {item.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* HELP */}
-            <div>
-              <h3 className="text-xl font-semibold text-pink-700 mb-6 tracking-widest">HELP</h3>
-              <ul className="space-y-3">
-                {helpLinks.map((item, i) => (
-                  <li key={i}>
-                    <Link 
-                      to={item.link}
-                      className="text-text-black hover:text-pink-700 cursor-pointer transition-colors block"
-                    >
-                      {item.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-2 space-y-4">
-                <div className="flex items-center gap-3 text-black">
-                  <FaPhone className="" />
-                  <span>+91 8218253516</span>
-                </div>
-                <div className="flex items-center gap-3 text-black">
-                  <FaEnvelope className="" />
-                  <span>support@beauty.store</span>
-                </div>
-                <div className="flex items-center gap-3 text-black">
-                  <FaMapMarkerAlt className="" />
-                  <span className="text-sm">Moradabad • Ratanpur • BahadurpurRajpoot</span>
-                </div>
-              </div>
-            </div>
-
-            {/* NEWSLETTER SECTION - EXACTLY LIKE DIAGRAM */}
-            <div>
-              <h3 className="text-xl font-semibold text-pink-700 mb-6 tracking-widest">NEWSLETTER</h3>
-              <p className="text-black mb-6 text-sm">
-                Sign Up to get updates & news about us. Get the latest deals directly in your inbox.
-              </p>
-
-              {/* EMAIL INPUT - EXACTLY LIKE DIAGRAM */}
-              <div className="space-y-4">
-                <div className="relative">
-                  {/* INPUT FIELD - WHITE background like diagram */}
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-                    placeholder="Email Address"
-                    className="
-                      w-full
-                      bg-white
-                      text-black
-                      pl-4
-                      pr-16
-                      py-4
-                      rounded-xl
-                      border-2
-                      border-pink-700
-                      focus:outline-none
-                      focus:ring-1
-                      focus:ring-pink-700
-                      text-sm
-                      placeholder-gray-500
-                    "
-                  />
-
-                  {/* VERTICAL LINE (DANDA) on RIGHT SIDE */}
-                 
-
-                  {/* ENVELOPE ICON - RIGHT SIDE with PINK-700 background */}
-                  <div className="
-                    absolute 
-                    right-0 
-                    top-1/2 
-                    transform 
-                    -translate-y-1/2
-                    w-10 
-                    h-full 
-                    bg-pink-700 
-                    rounded-r-xl 
-                    flex 
-                    items-center 
-                    justify-center
-                  ">
-                    <FaEnvelope className="text-white text-sm" />
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
+
+          {/* 2. MORE RESOURCES */}
+          <div className="lg:col-span-2">
+            <h3 className="text-black font-bold text-lg uppercase tracking-wider mb-6">Resources</h3>
+            <ul className="space-y-3 text-sm">
+              <li><Link to="/about" className="hover:text-[#D4AF37] transition-colors">About</Link></li>
+              <li><Link to="/blog" className="hover:text-[#D4AF37] transition-colors">Blog</Link></li>
+              <li><Link to="/contact" className="hover:text-[#D4AF37] transition-colors">Contact</Link></li>
+              <li><Link to="/privacy" className="hover:text-[#D4AF37] transition-colors">Privacy Policy</Link></li>
+            </ul>
+          </div>
+
+          {/* 3. PRODUCT CATEGORIES */}
+          <div className="lg:col-span-3">
+            <h3 className="text-black font-bold text-lg uppercase tracking-wider mb-6">Categories</h3>
+            <ul className="space-y-3 text-sm">
+              <li><Link to="#" className="hover:text-[#D4AF37]">Triply cookware </Link></li>
+              <li><Link to="#" className="hover:text-[#D4AF37]">Thermoware </Link></li>
+              <li><Link to="#" className="hover:text-[#D4AF37]">Lunchbox</Link></li>
+              <li><Link to="#" className="hover:text-[#D4AF37]">Cookware sets</Link></li>
+              <li><Link to="#" className="hover:text-[#D4AF37]">Steel bottles</Link></li>
+            </ul>
+          </div>
+
+          {/* 4. CONTACT US */}
+          <div className="lg:col-span-3 space-y-6">
+            <h3 className="text-black font-bold text-lg uppercase tracking-wider">Contact Us</h3>
+            <div className="space-y-4">
+              <p className="text-sm font-medium text-gray-800">
+                Call us at: <br />
+                <span className="text-lg font-bold text-[#D4AF37]">+9155655655656</span>
+              </p>
+              <p className="text-xs text-gray-400 uppercase tracking-widest">
+                Registered Office: <br />
+                <span className="normal-case text-gray-500">Moradabad, UP, India</span>
+              </p>
+            </div>
+          </div>
+
         </div>
 
-        {/* 3D WAVE SVG */}
-        <div className="w-full overflow-hidden -mt-4">
-          <svg className="block w-full h-[140px]" viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <path
-              d="M321.39,56.44c58-10.79,114.84-30.13,172-41.86c82.39-16.72,168.19-17.73,
-                 250.45-.39c57.84,12.59,112.43,35.25,169.81,47.06c118.4,24.58,
-                 233.36,2.88,343.16-41.14V120H0V16.48
-                 C103.29,64.41,213.72,76.75,321.39,56.44Z"
-              fill="#be185d"
-            />
-          </svg>
+        {/* BOTTOM BAR (Copyright Area) */}
+        <div className="border-t border-black py-6 flex flex-col md:flex-row justify-between items-center text-[14px] text-black tracking-widest">
+          <p>© 2026 Puspendra . All Rights Reserved.</p>
+          <div className="flex gap-4 mt-4 md:mt-0">
+             <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" className="h-3 opacity-50" />
+             <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="Paypal" className="h-3 opacity-50" />
+          </div>
         </div>
-
-        {/* BOTTOM SECTION - NO TOP/BOTTOM SPACE */}
-       
-      </footer>
-    </>
+      </div>
+    </footer>
   );
 };
 

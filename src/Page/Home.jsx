@@ -19,8 +19,9 @@ const Home = ({ card, setCard }) => {
       <Video />
       <Our_Product card={card} setCard={setCard} />
       <MyOurTeam />
-      <TeamMembers />
       <Get_Glowing />
+      <TeamMembers />
+      
     </div>
   );
 };

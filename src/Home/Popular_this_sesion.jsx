@@ -3,20 +3,20 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 // --- 15 IMAGES IMPORTS ---
-import side1 from "../assets/Images/side1.webp";
-import side2 from "../assets/Images/side2.png";
-import side3 from "../assets/Images/side3.jpg";
-import side5 from "../assets/Images/side5.jpg";
-import side6 from "../assets/Images/side6.jpg";
-import side7 from "../assets/Images/side7.jpg";
-import side9 from "../assets/Images/side9.jpg";
-import side11 from "../assets/Images/side11.png";
-import side12 from "../assets/Images/side12.png";
-import side13 from "../assets/Images/side13.jpg";
-import side14 from "../assets/Images/side14.jpg";
-import side15 from "../assets/Images/side15.jpg";
-import side16 from "../assets/Images/side16.jpg";
-import sideImage from "../assets/Images/side.jpg"; // Remaining 2 for 15
+import side1 from "../assets/Images/side1.jpeg";
+import side2 from "../assets/Images/side2.jpeg";
+import side3 from "../assets/Images/side3.jpeg";
+import side4 from "../assets/Images/side4.jpeg";
+import side5 from "../assets/Images/side5.jpeg";
+import side6 from "../assets/Images/side6.jpeg";
+import side7 from "../assets/Images/side7.jpeg";
+import side8 from "../assets/Images/side8.jpeg";
+import side9 from "../assets/Images/side9.jpeg";
+import side10 from "../assets/Images/side10.jpeg";
+import side11 from "../assets/Images/side11.jpeg";
+import side12 from "../assets/Images/side12.jpeg";
+import side13 from "../assets/Images/side13.jpeg";
+import sideImage from "../assets/Images/side.jpeg"; // Remaining 2 for 15
 import bannerImg from "../assets/Images/website_banner.webp"; 
 
 const This_Season = () => {
@@ -28,18 +28,18 @@ const This_Season = () => {
     { name: "Frying Pans", img: side1 },
     { name: "Sauce Pans", img: side2 },
     { name: "Kadhai", img: side3 },
-    { name: "Tawas", img: side5 },
-    { name: "Casseroles", img: side6 },
-    { name: "Tadka Pan", img: side7 },
-    { name: "Cookware Sets", img: side9 },
-    { name: "Pressure Cooker", img: side11 },
-    { name: "Grill Pans", img: side12 },
-    { name: "Milk Pans", img: side13 },
-    { name: "Steamers", img: side14 },
-    { name: "Woks", img: side15 },
-    { name: "Appam Patra", img: side16 },
+    { name: "Tawas", img: side4 },
+    { name: "Casseroles", img: side5 },
+    { name: "Tadka Pan", img: side6 },
+    { name: "Cookware Sets", img: side7 },
+    { name: "Pressure Cooker", img: side8 },
+    { name: "Grill Pans", img: side9 },
+    { name: "Milk Pans", img: side10 },
+    { name: "Steamers", img: side11 },
+    { name: "Woks", img: side12 },
+    { name: "Appam Patra", img: side13 },
     { name: "Serveware", img: sideImage },
-    { name: "Kitchen Tools", img: side1 }, // Repeating 1 to make it 15
+    // { name: "Kitchen Tools", img: side14 }, // Repeating 1 to make it 15
   ];
 
   // Intersection Observer for Animation
@@ -72,7 +72,7 @@ const This_Season = () => {
             {/* Array ko 2 baar repeat kiya hai infinite feel ke liye */}
             {[...categories, ...categories].map((item, i) => (
               <div key={i} className="flex flex-col items-center min-w-[150px] md:min-w-[180px]">
-                <div className="w-32 h-32 md:w-44 md:h-44 rounded-full overflow-hidden  shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                <div className="w-32 h-32 md:w-44 md:h-44 overflow-hidden   transition-all duration-300 transform hover:scale-105">
                   <img 
                     src={item.img} 
                     alt={item.name} 

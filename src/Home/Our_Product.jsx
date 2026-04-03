@@ -36,7 +36,7 @@ const Our_Product = ({ card, setCard }) => {
         {/* Heading */}
         <div className="text-center mb-10">
         
-          <h1 className="text-4xl font-bold text-gray-800">
+          <h1 className="text-4xl font-bold text-red-800">
             OUR PRODUCTS
           </h1>
         </div>
@@ -107,11 +107,11 @@ const Our_Product = ({ card, setCard }) => {
 
               {/* CONTENT - Bounce on hover */}
               <div className="p-4 text-center flex-grow group-hover:animate-pulse">
-                <h1 className="text-lg font-semibold text-black transform transition-transform duration-500 group-hover:scale-105">
+                <h1 className="text-lg  text-black transform transition-transform duration-500 group-hover:scale-105">
                   {item.title}
                 </h1>
                 <div className="flex justify-between px-10">
-                <p className="text-yellow-500 text-sm transform transition-transform duration-500 group-hover:scale-110">
+                <p className="text-red-500 text-sm transform transition-transform duration-500 group-hover:scale-110">
                  Rating ★★★★★
                 </p>
                 <p className="text-black font-semibold  transform transition-transform duration-500 group-hover:scale-110">
@@ -124,8 +124,8 @@ const Our_Product = ({ card, setCard }) => {
               <div className="p-4 pt-0">
                 <Link
                 to={"/payment"}
-                  className="w-full bg-gradient-to-r from-pink-700 to-pink-700 
-                           text-white py-3 rounded-lg font-semibold
+                  className="w-full bg-[#FFD700]
+                           text-white py-3 rounded-sm font-semibold
                            flex items-center justify-center gap-2
                            hover:from-pink-700 hover:to-pink-700 
                            transition-all duration-300 hover:scale-[1.02] 

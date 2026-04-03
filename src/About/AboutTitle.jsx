@@ -1,5 +1,5 @@
 import React from "react";
-import shoping from "../assets/Images/shopping.jpg"
+import shoping from "../assets/Images/side.jpeg"
 
 const AboutTitle = () => {
   return (

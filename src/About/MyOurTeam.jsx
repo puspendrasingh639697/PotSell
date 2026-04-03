@@ -1,60 +1,33 @@
-import React, { useEffect, useRef, useState } from "react";
-import { FaUsers } from "react-icons/fa";
+import React from "react";
+// Images import kar lo taaki React mein error na aaye
+import side15 from "../assets/Images/side15.jpeg"; 
+import side16 from "../assets/Images/side18.jpeg";
 
 const MyOurTeam = () => {
-  const ref = useRef(null);
-  const [show, setShow] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setShow(true);
-      },
-      { threshold: 0.3 }
-    );
-
-    ref.current && observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <div
-      ref={ref}
-      className="w-full py-10 relative overflow-hidden bg-white"
-    >
-      {/* Soft Pink Glow */}
-      <div className="absolute inset-0 "></div>
+    <div className="w-full py-10 bg-white">
+      <div className="max-w-7xl mx-auto px-4">
+        {/* Flexbox ka use karke dono images ko side-by-side set kiya hai */}
+        <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
+          
+          {/* Left Image */}
+          <div className="w-full md:w-1/2">
+            <img 
+              src={side15} 
+              alt="side-15" 
+              className="w-full h-auto object-cover rounded-sm shadow-sm"
+            />
+          </div>
 
-      <div
-        className={`relative text-center max-w-4xl mx-auto px-4
-        transform transition-all duration-700 ease-out
-        ${
-          show
-            ? "opacity-100 translate-y-0"
-            : "opacity-0 translate-y-20"
-        }`}
-      >
-        {/* Icon */}
-       
+          {/* Right Image */}
+          <div className="w-full md:w-1/2">
+            <img 
+              src={side16} 
+              alt="side-16" 
+              className="w-full h-auto object-cover rounded-sm shadow-sm"
+            />
+          </div>
 
-        {/* Heading with Whisper Effect */}
-        <h1
-          className="relative text-6xl sm:text-4xl font-bold
-         text-black
-        "
-        >
-          MY OUR TEAM
-        </h1>
-
-        {/* Subtitle */}
-        <p className="mt-6 text-xl sm:text-2xl text-black">
-          Passionate individuals dedicated to bringing you
-          the best grocery experience
-        </p>
-
-        {/* Divider */}
-        <div className="mt-10 flex justify-center">
-          <span className="w-40 h-[3px] bg-gradient-to-r from-pink-500 via-pink-400 to-pink-300 rounded-full"></span>
         </div>
       </div>
     </div>

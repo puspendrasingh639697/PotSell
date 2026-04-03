@@ -3,14 +3,14 @@ import ProductModals from "../Component/ProductModals";
 import { Link } from "react-router-dom";
 
 // IMAGES
-import side1 from "../assets/Images/side11.png";
-import side2 from "../assets/Images/side1.webp";
-import side3 from "../assets/Images/side23.jpg";
-import side5 from "../assets/Images/side5.jpg";
-import side6 from "../assets/Images/side6.jpg";
-import side7 from "../assets/Images/side7.jpg";
-import side9 from "../assets/Images/side9.jpg";
-import side11 from "../assets/Images/side11.png";
+import side1 from "../assets/Images/side11.jpeg";
+import side2 from "../assets/Images/side1.jpeg";
+import side30 from "../assets/Images/side30.jpeg";
+import side5 from "../assets/Images/side5.jpeg";
+import side6 from "../assets/Images/side6.jpeg";
+import side7 from "../assets/Images/side7.jpeg";
+import side9 from "../assets/Images/side9.jpeg";
+import side11 from "../assets/Images/side11.jpeg";
 
 const Video = ({ card, setCard }) => {
   const [category, setCategory] = useState([]);
@@ -18,7 +18,7 @@ const Video = ({ card, setCard }) => {
 
   // ✅ 8 ITEMS
   const myCategories = [
-    { title: "Lunch Box", image: side3, count: 12 },
+    { title: "Lunch Box", image: side30, count: 12 },
     { title: "Casserole Set", image: side2, count: 11 },
     { title: "Kettles", image: side1, count: 4 },
     { title: "Pressure Cookers", image: side5, count: 4 },
@@ -39,10 +39,10 @@ const Video = ({ card, setCard }) => {
 
         {/* HEADING */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-red-500 tracking-wide">
+          <h1 className="text-4xl font-bold text-red-800 tracking-wide">
             BROWSE OUR CATEGORIES
           </h1>
-          <div className="w-16 h-1 bg-red-500 mx-auto mt-3 rounded-full"></div>
+          <div className="w-16 h-1 bg-red-800 mx-auto mt-3 rounded-full"></div>
         </div>
 
         {/* GRID */}
@@ -52,9 +52,9 @@ const Video = ({ card, setCard }) => {
             <div
               key={index}
               onClick={() => addModals(item)}
-              className="group cursor-pointer bg-white rounded-lg overflow-hidden 
+              className="group cursor-pointer bg-white  overflow-hidden 
 transition-all duration-300 
-shadow-md hover:shadow-2xl hover:-translate-y-2 
+
 hover:bg-[#f4c58f]"
             >
 
