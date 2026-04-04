@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { HoverImageData } from "../JsonData/Home_Json";
-import { FaEye, FaHeart, FaShareAlt, FaBoxOpen, FaShoppingCart } from "react-icons/fa";
+import { FaEye, FaHeart, FaShareAlt } from "react-icons/fa";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ProductModals from "../Component/ProductModals";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // useNavigate add kiya
 
 const Our_Product = ({ card, setCard }) => {
   const [category, setCategory] = useState([]);
   const [show, setShow] = useState(false);
+  const navigate = useNavigate(); // Hook initialize kiya
 
   const addToCard = (id, price, title, image) => {
     setCard([...card, { id, price, title, image }]);
@@ -26,136 +27,109 @@ const Our_Product = ({ card, setCard }) => {
     setShow(true);
   };
 
+  // Category page par bhejne ke liye function
+  const goToCategory = (categoryName) => {
+    const slug = categoryName.toLowerCase().replace(/\s+/g, '-');
+    navigate(`/category/${slug}`);
+  };
+
   return (
     <>
-    
-
       <ToastContainer />
 
       <div className="w-full py-12 bg-white">
-        {/* Heading */}
         <div className="text-center mb-10">
-        
-          <h1 className="text-4xl font-bold text-red-800">
+          <h1 className="text-4xl font-bold text-red-800 uppercase tracking-wide">
             OUR PRODUCTS
           </h1>
         </div>
 
-        {/* Products Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-5">
           {HoverImageData.map((item) => (
             <div
               key={item.id}
-              className="bg-white rounded-xl shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl flex flex-col"
+              className="bg-white rounded-xl shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl flex flex-col border border-gray-100"
             >
-              {/* IMAGE AREA */}
-              <div className="relative h-60 bg-white flex items-center justify-center overflow-hidden rounded-t-xl group">
+              {/* IMAGE AREA - Clickable */}
+              <div 
+                onClick={() => goToCategory(item.category || "all")} 
+                className="relative h-60 bg-white flex items-center justify-center overflow-hidden rounded-t-xl group cursor-pointer"
+              >
                 <img
                   src={item.image}
                   alt={item.title}
                   className="max-h-full max-w-full object-contain p-4 transition-all duration-500 group-hover:scale-110"
                 />
 
-                {/* HOVER ICONS - Bounce animation except Add to Cart */}
+                {/* HOVER ICONS */}
                 <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center gap-4">
-                  {/* Heart Icon - Bounce */}
                   <button
-                    onClick={() =>
-                      addToCard(
-                        item.id,
-                        item.price,
-                        item.title,
-                        item.image
-                      )
-                    }
-                    className="p-3 bg-white rounded-full
-                               transform -translate-y-10 opacity-0
-                               group-hover:translate-y-0 group-hover:opacity-100
-                               transition-all duration-500 hover:animate-bounce
-                               hover:bg-red-500 hover:text-white"
-                    style={{ transitionDelay: "0ms" }}
+                    onClick={(e) => {
+                      e.stopPropagation(); // Parent click prevent karne ke liye
+                      addToCard(item.id, item.price, item.title, item.image);
+                    }}
+                    className="p-3 bg-white rounded-full transform -translate-y-10 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 hover:animate-bounce hover:bg-red-500 hover:text-white"
                   >
                     <FaHeart />
                   </button>
 
-                  {/* Share Icon - Bounce */}
                   <button
-                    className="p-3 bg-white rounded-full
-                               transform -translate-y-10 opacity-0
-                               group-hover:translate-y-0 group-hover:opacity-100
-                               transition-all duration-500 hover:animate-bounce
-                               hover:bg-blue-500 hover:text-white"
-                    style={{ transitionDelay: "100ms" }}
+                    onClick={(e) => e.stopPropagation()}
+                    className="p-3 bg-white rounded-full transform -translate-y-10 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 hover:animate-bounce hover:bg-blue-500 hover:text-white"
                   >
                     <FaShareAlt />
                   </button>
 
-                  {/* Eye Icon - Bounce */}
                   <button
-                    onClick={() => addModals(item.id)}
-                    className="p-3 bg-white rounded-full
-                               transform -translate-y-10 opacity-0
-                               group-hover:translate-y-0 group-hover:opacity-100
-                               transition-all duration-500 hover:animate-bounce
-                               hover:bg-green-600 hover:text-white"
-                    style={{ transitionDelay: "200ms" }}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      addModals(item.id);
+                    }}
+                    className="p-3 bg-white rounded-full transform -translate-y-10 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 hover:animate-bounce hover:bg-green-600 hover:text-white"
                   >
                     <FaEye />
                   </button>
                 </div>
               </div>
 
-              {/* CONTENT - Bounce on hover */}
+              {/* CONTENT AREA */}
               <div className="p-4 text-center flex-grow group-hover:animate-pulse">
-                <h1 className="text-lg  text-black transform transition-transform duration-500 group-hover:scale-105">
+                <h1 
+                  onClick={() => goToCategory(item.category || "all")}
+                  className="text-lg text-black font-medium cursor-pointer hover:text-red-800 transition-colors"
+                >
                   {item.title}
                 </h1>
-                <div className="flex justify-between px-10">
-                <p className="text-red-500 text-sm transform transition-transform duration-500 group-hover:scale-110">
-                 Rating ★★★★★
-                </p>
-                <p className="text-black font-semibold  transform transition-transform duration-500 group-hover:scale-110">
-                  ₹ {item.price}
-                </p>
+                <div className="flex justify-between items-center mt-3 px-2">
+                  <p className="text-yellow-500 text-xs font-bold">
+                    Rating ★★★★★
+                  </p>
+                  <p className="text-black font-bold text-lg">
+                    ₹ {item.price}
+                  </p>
                 </div>
               </div>
 
-              {/* ADD TO CART BUTTON - No bounce animation */}
+              {/* ADD TO CART BUTTON */}
               <div className="p-4 pt-0">
-                <Link
-                to={"/payment"}
-                  className="w-full bg-[#FFD700]
-                           text-white py-3 rounded-sm font-semibold
-                           flex items-center justify-center gap-2
-                           hover:from-pink-700 hover:to-pink-700 
-                           transition-all duration-300 hover:scale-[1.02] 
-                           active:scale-[0.98] shadow-md hover:shadow-lg"
+                <button
+                  onClick={() => addToCard(item.id, item.price, item.title, item.image)}
+                  className="w-full bg-[#FFD700] text-black py-3 rounded-md font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-300 hover:bg-[#e6c200] active:scale-95 shadow-md"
                 >
-                  < button
-                    onClick={() =>
-                      addToCard(
-                        item.id,
-                        item.price,
-                        item.title,
-                        item.image,
-                      )
-                    }
-                  >
                   Add to Cart
-                  </button>
-                </Link>
+                </button>
               </div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* PRODUCT MODAL */}
       {show && (
         <ProductModals
           onClose={() => setShow(false)}
           category={category}
-          card={card} setCard={ setCard}
+          card={card}
+          setCard={setCard}
         />
       )}
     </>

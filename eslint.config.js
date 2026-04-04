@@ -2,28 +2,36 @@ import js from '@eslint/js'
 import globals from 'globals'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
-import { defineConfig, globalIgnores } from 'eslint/config'
 
-export default defineConfig([
-  globalIgnores(['dist']),
+export default [
+  { ignores: ['dist', 'node_modules'] },
   {
-    files: ['**/*.{js,jsx}'],
-    extends: [
-      js.configs.recommended,
-      reactHooks.configs['recommended-latest'],
-      reactRefresh.configs.vite,
-    ],
+    files: ['**/*.{js,jsx,cjs,mjs}'], // cjs aur mjs bhi add kiya
     languageOptions: {
-      ecmaVersion: 2020,
-      globals: globals.browser,
+      ecmaVersion: 'latest',
+      sourceType: 'module', // Default module rakho
+      globals: {
+        ...globals.browser,
+        ...globals.node, // Node globals add kiye config files ke liye
+      },
       parserOptions: {
-        ecmaVersion: 'latest',
         ecmaFeatures: { jsx: true },
-        sourceType: 'module',
       },
     },
+    plugins: {
+      'react-hooks': reactHooks,
+      'react-refresh': reactRefresh,
+    },
     rules: {
-      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+      ...js.configs.recommended.rules,
+      ...reactHooks.configs.recommended.rules,
+      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+      
+      // STOPSC: Faltu code pakadne ke rules
+      'no-unused-vars': 'error',          // Koi variable faltu nahi hona chahiye
+      'no-console': 'warn',               // Console logs warning denge
+      'no-undef': 'error',                // Bina define kiya variable error dega
+      'prefer-const': 'error',            // Jo change nahi ho raha wo 'const' hona chahiye
     },
   },
-])
+]

@@ -1,9 +1,7 @@
 import React from "react";
 import google from "../assets/Icons/google.png";
 import appstore from "../assets/Icons/Appstoe.png";
-import { MdOutlineForwardToInbox } from "react-icons/md";
-import { FaMobileScreenButton } from "react-icons/fa6";
-import { BsTelephoneXFill } from "react-icons/bs";
+
 
 const Footer = () => {
   return (

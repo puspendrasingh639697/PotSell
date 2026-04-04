@@ -22,6 +22,8 @@ import ScrollToTop from "./Component/ScrollToTop";
 import AddDeliveryAddress from './Page/AddDeliveryAddress'
 import Payment from './Page/Payment'
 import OrderSumary from './Page/OrderSumary'
+import CategoryPage from './OurProduct/CategoryPage'
+import ProductDetail from './OurProduct/ProductDetail'
 
 const App = () => {
   const [card,setCard] = useState([])
@@ -58,6 +60,8 @@ const App = () => {
         <Route path='/addDeliveryAddress' element={<AddDeliveryAddress formData ={formData} setFormData={setFormData}/>}></Route>
         <Route path='/orderSumary' element={<OrderSumary card = {card} setCard = {setCard} formData ={formData} setFormData={setFormData}/>}></Route>
         <Route path='/payment' element={<Payment card = {card} setCard = {setCard}/>}></Route>
+        <Route path='/category/:categoryId' element={<CategoryPage card={card} setCard={setCard} />} />
+        <Route path='/product/:id' element={<ProductDetail card={card} setCard={setCard}/>} />
 
       </Routes>
       <Footer2/>
